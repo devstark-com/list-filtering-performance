@@ -1,8 +1,11 @@
 <template>
-  <div class="filters-pane" style="position: fixed;" v-if="filters !== null">
-    <xfilter v-for="(items, index) in filters" :items="items"></xfilter>
+  <div class="filters-pane">
+    <h4>FILTERS</h4>
+    <div v-if="filters !== null">
+      <xfilter v-for="(items, index) in filters" :items="items"></xfilter>
+    </div>
+    <div v-else>No filters available</div>
   </div>
-  <div v-else>No filters available</div>
 </template>
 <script>
 import xfilter from './Filter.vue'
@@ -19,3 +22,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .filters-pane {
+    position: fixed;
+  }
+</style>

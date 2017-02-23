@@ -1,7 +1,13 @@
 <template>
-  <div class="page">
-    <filter-pane :filters="filters"></filter-pane>
-    <breakdown :list="list"></breakdown>
+  <div class="page container">
+    <div class="row">
+      <div class="col-md-3">
+        <filter-pane :filters="filters"></filter-pane>
+      </div>
+      <div class="col-md-9">
+        <breakdown :list="list"></breakdown>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,13 +49,14 @@ export default {
     }
   },
   created () {
-    for (let i = 0; i < 5000; i++) {
+    for (let i = 0; i < 100; i++) {
       var item = {
         id: i,
         name: Faker.name.findName(),
         jobArea: Faker.name.jobArea(),
         jobType: Faker.name.jobType(),
-        gender: Faker.random.arrayElement(['male', 'female'])
+        gender: Faker.random.arrayElement(['male', 'female']),
+        avatar: Faker.image.avatar()
       }
 
       Vue.set(this.list, i, item)

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <select @change="">
+  <div class="form-group">
+    <select class="form-control" @change="">
       <option>-- none --</option>
       <option v-for="(value, index) in items">{{ index }} ({{ value }})</option>
     </select>

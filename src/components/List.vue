@@ -48,7 +48,7 @@ export default {
         }
       }
     },
-    filterToggled (name, value) {
+    filtersChange (name, value) {
       if (!value || value === null) {
         Vue.delete(this.filteringStates, name)
       } else {
@@ -75,7 +75,8 @@ export default {
     this.populateFilters()
   },
   mounted () {
-    this.$eventHub.$on('filter::clicked', this.filterToggled)
+    this.$eventHub.$on('filter::clicked', this.filtersChange)
+    // this.$eventHub.$on('filter::set-changed')
   }
 }
 </script>

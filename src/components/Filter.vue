@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <select class="form-control" @change="select()">
+    <select v-model="value" class="form-control" @change="select()">
       <option value="null">-- none --</option>
       <option v-for="(value, index) in items" :value="index">{{ index }} ({{ value }})</option>
     </select>

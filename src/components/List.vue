@@ -19,7 +19,8 @@ export default {
   data () {
     return {
       list: [],
-      filters: {}
+      filters: {},
+      filteringStates: {}
     }
   },
   methods: {
@@ -40,12 +41,22 @@ export default {
           }
         }
       }
+    },
+    filterToggled (name, value) {
+      if (!value || value === null) {
+        Vue.delete(this.filteringStates, name)
+      } else {
+        Vue.set(this.filteringStates, name, value)
+      }
+
+      this.$eventHub.$emit('filter::set-changed', this.name, this.cpValue)
     }
   },
   created () {
     for (let i = 0; i < 5000; i++) {
       var item = {
         id: i,
+        filtered: false,
         name: Faker.name.findName(),
         jobArea: Faker.name.jobArea(),
         jobType: Faker.name.jobType(),
@@ -55,6 +66,9 @@ export default {
       Vue.set(this.list, i, item)
     }
     this.populateFilters()
+  },
+  mounted () {
+    this.$eventHub.$on('filter::clicked', this.filterToggled)
   }
 }
 </script>

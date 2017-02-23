@@ -2,7 +2,7 @@
   <div class="item list-item">
       <div class="row">
         <div class="col-md-2">
-          <img :src="itemData.avatar" alt="">
+          <img :src="itemData.avatar" class="img-responsive" alt="">
         </div>
         <div class="col-md-8">
           <h4>{{ itemData.name }}</h4>

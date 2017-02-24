@@ -16,6 +16,14 @@ export default {
       required: false,
       default: []
     }
+  },
+  beforeUpdate: function () {
+    console.time('re-rendering')
+    console.log('beforeUpdate')
+  },
+  updated: function () {
+    console.timeEnd('re-rendering')
+    console.log('updated')
   }
 }
 </script>

@@ -69,16 +69,16 @@ export default {
     },
     filterResults () {
       console.log('filterResults()')
-      // console.time('filtering')
+      console.time('data update')
       let criterias = this.filteringStates
       for (let item of this.list) {
         item.filtered = this.isItemFiltered(item, criterias)
       }
-      // console.timeEnd('filtering')
+      console.timeEnd('data update')
     }
   },
   created () {
-    for (let i = 0; i < 2500; i++) {
+    for (let i = 0; i < 200; i++) {
       var item = {
         id: i,
         filtered: false,

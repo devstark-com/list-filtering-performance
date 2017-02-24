@@ -1,21 +1,7 @@
-# list-filtering
+# Варианты
+- List 1 - фильтрация методом отдельного массива для фильтруемого списка
+- List 2 - фильтрация методом v-show
 
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# Гипотезы
+1. v-show должен работать быстрее, чем два массива
+2. Сложные дочерние компоненты у items существенно не влияют на первоманс если они не заатачены в списках (скрыты через v-if)

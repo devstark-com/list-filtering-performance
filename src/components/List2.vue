@@ -18,6 +18,7 @@ import FilterPane from './FilterPane.vue'
 import Breakdown2 from './Breakdown2.vue'
 
 export default {
+  name: 'List2',
   components: {
     FilterPane,
     Breakdown2
@@ -56,10 +57,28 @@ export default {
       }
 
       this.$eventHub.$emit('filter::set-changed', this.name, this.cpValue)
+    },
+    isItemFiltered (item, criterias) {
+      if (criterias.length === 0) return false
+      for (let criteria in criterias) {
+        if (criterias[criteria] !== item[criteria]) {
+          return true
+        }
+      }
+      return false
+    },
+    filterResults () {
+      console.log('filterResults()')
+      // console.time('filtering')
+      let criterias = this.filteringStates
+      for (let item of this.list) {
+        item.filtered = this.isItemFiltered(item, criterias)
+      }
+      // console.timeEnd('filtering')
     }
   },
   created () {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 2500; i++) {
       var item = {
         id: i,
         filtered: false,
@@ -72,11 +91,12 @@ export default {
 
       Vue.set(this.list, i, item)
     }
+
     this.populateFilters()
-  },
-  mounted () {
+
+    this.$eventHub.$off()
     this.$eventHub.$on('filter::clicked', this.filtersChange)
-    // this.$eventHub.$on('filter::set-changed')
+    this.$eventHub.$on('filter::set-changed', this.filterResults)
   }
 }
 </script>

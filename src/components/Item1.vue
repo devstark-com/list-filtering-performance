@@ -25,18 +25,18 @@ export default {
   data () {
     return {
     }
-  },
-  created () {
-    console.log('created')
-  },
-  mounted () {
-    console.log('mounted')
-  },
-  updated () {
-    console.log('updated')
-  },
-  destroyed () {
-    console.log('destroyed')
+  // },
+  // created () {
+  //   console.log('ITEM created')
+  // },
+  // mounted () {
+  //   console.log('ITEM mounted')
+  // },
+  // updated () {
+  //   console.log('ITEM updated')
+  // },
+  // destroyed () {
+  //   console.log('ITEM destroyed')
   }
 }
 </script>

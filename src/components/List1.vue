@@ -5,7 +5,7 @@
         <filter-pane :filters="filters"></filter-pane>
       </div>
       <div class="col-md-9">
-        <breakdown1 :list="list"></breakdown1>
+        <breakdown1 :list="listForRendering"></breakdown1>
       </div>
     </div>
   </div>
@@ -16,7 +16,7 @@ import Faker from 'faker'
 import Vue from 'vue'
 import FilterPane from './FilterPane.vue'
 import Breakdown1 from './Breakdown1.vue'
-
+import { update as u } from 'modules/breakdown-update.js'
 export default {
   components: {
     FilterPane,
@@ -25,7 +25,9 @@ export default {
   data () {
     return {
       list: [],
-      filters: {}
+      filters: {},
+      listForRendering: [],
+      filteringStates: {}
     }
   },
   methods: {
@@ -46,10 +48,24 @@ export default {
           }
         }
       }
+    },
+    update () {
+      console.time('data update')
+      this.listForRendering = u(this.list, this.filteringStates, null)
+      console.timeEnd('data update')
+    },
+    filtersChange (name, value) {
+      if (!value || value === null) {
+        Vue.delete(this.filteringStates, name)
+      } else {
+        Vue.set(this.filteringStates, name, value)
+      }
+
+      this.$eventHub.$emit('filter::set-changed')
     }
   },
   created () {
-    for (let i = 0; i < 2500; i++) {
+    for (let i = 0; i < 5000; i++) {
       var item = {
         id: i,
         filtered: false,
@@ -64,6 +80,11 @@ export default {
     }
 
     this.populateFilters()
+    this.update()
+
+    this.$eventHub.$off()
+    this.$eventHub.$on('filter::clicked', this.filtersChange)
+    this.$eventHub.$on('filter::set-changed', this.update)
   }
 }
 </script>

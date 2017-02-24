@@ -25,8 +25,7 @@ export default {
   data () {
     return {
       list: [],
-      filters: {},
-      filteringStates: {}
+      filters: {}
     }
   },
   methods: {
@@ -47,19 +46,10 @@ export default {
           }
         }
       }
-    },
-    filtersChange (name, value) {
-      if (!value || value === null) {
-        Vue.delete(this.filteringStates, name)
-      } else {
-        Vue.set(this.filteringStates, name, value)
-      }
-
-      this.$eventHub.$emit('filter::set-changed', this.name, this.cpValue)
     }
   },
   created () {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 2500; i++) {
       var item = {
         id: i,
         filtered: false,
@@ -72,11 +62,8 @@ export default {
 
       Vue.set(this.list, i, item)
     }
+
     this.populateFilters()
-  },
-  mounted () {
-    this.$eventHub.$on('filter::clicked', this.filtersChange)
-    // this.$eventHub.$on('filter::set-changed')
   }
 }
 </script>

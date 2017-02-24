@@ -26,7 +26,9 @@ export default {
   },
   methods: {
     update () {
+      console.time('data update')
       this.listForRendering = u(this.list, this.filteringStates, null)
+      console.timeEnd('data update')
     },
     filtersChange (name, value) {
       if (!value || value === null) {

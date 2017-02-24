@@ -5,7 +5,7 @@
         <filter-pane :filters="filters"></filter-pane>
       </div>
       <div class="col-md-9">
-        <breakdown :list="list"></breakdown>
+        <breakdown1 :list="list"></breakdown1>
       </div>
     </div>
   </div>
@@ -15,12 +15,12 @@
 import Faker from 'faker'
 import Vue from 'vue'
 import FilterPane from './FilterPane.vue'
-import Breakdown from './Breakdown.vue'
+import Breakdown1 from './Breakdown1.vue'
 
 export default {
   components: {
     FilterPane,
-    Breakdown
+    Breakdown1
   },
   data () {
     return {

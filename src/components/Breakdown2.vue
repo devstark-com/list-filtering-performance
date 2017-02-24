@@ -6,6 +6,7 @@
 <script>
 import Item2 from './Item2.vue'
 export default {
+  name: 'Breakdown2',
   components: {
     Item2
   },

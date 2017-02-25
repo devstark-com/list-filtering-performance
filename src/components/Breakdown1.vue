@@ -4,7 +4,7 @@
       class="scroller"
       :items="list"
       :renderers="renderers"
-      item-height="143"
+      item-height="164"
       type-field="type"
       key-field="id"
       page-mode

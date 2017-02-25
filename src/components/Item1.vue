@@ -47,6 +47,7 @@ export default {
     border-radius: 4px;
     padding: 15px;
     margin-bottom: 20px;
+    min-height: 144px;
   }
   .list-item ul.list {
     padding-left: 18px;

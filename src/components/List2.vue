@@ -78,7 +78,7 @@ export default {
     }
   },
   created () {
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 10000; i++) {
       var item = {
         id: i,
         filtered: false,

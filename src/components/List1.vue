@@ -24,6 +24,9 @@ export default {
   },
   data () {
     return {
+      filterTypes: [
+        'jobArea', 'jobType', 'gender'
+      ],
       list: [],
       filters: {},
       listForRendering: [],
@@ -32,6 +35,7 @@ export default {
   },
   methods: {
     populateFilters () {
+      console.time('filters populating')
       let criteria = ['jobArea', 'jobType', 'gender']
       for (let n in this.list) {
         let listItem = this.list[n]
@@ -48,6 +52,7 @@ export default {
           }
         }
       }
+      console.timeEnd('filters populating')
     },
     update () {
       console.time('data update')
@@ -65,9 +70,12 @@ export default {
     }
   },
   created () {
-    for (let i = 0; i < 5000; i++) {
+    console.time('seeding')
+    let items = []
+    for (let i = 0; i < 50000; i++) {
       var item = {
         id: i,
+        type: 'profile',
         filtered: false,
         name: Faker.name.findName(),
         jobArea: Faker.name.jobArea(),
@@ -76,10 +84,27 @@ export default {
         avatar: Faker.image.avatar()
       }
 
-      Vue.set(this.list, i, item)
+      items.push(item)
+
+      for (let n in this.filterTypes) {
+        let fType = this.filterTypes[n]
+
+        if (this.filters[fType] === undefined) {
+          this.filters[fType] = {}
+        }
+
+        if (!(item[fType] in this.filters[fType])) {
+          Vue.set(this.filters[fType], item[fType], 1)
+        } else {
+          this.filters[fType][item[fType]]++
+        }
+      }
     }
 
-    this.populateFilters()
+    Vue.set(this, 'list', items)
+    console.timeEnd('seeding')
+
+    // this.populateFilters()
     this.update()
 
     this.$eventHub.$off()

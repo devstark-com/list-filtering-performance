@@ -1,5 +1,5 @@
 <template>
-  <div class="item list-item" v-if="! itemData.filtered">
+  <div class="item list-item">
       <div class="row">
         <div class="col-md-2">
           <img :src="itemData.avatar" class="img-responsive" alt="">

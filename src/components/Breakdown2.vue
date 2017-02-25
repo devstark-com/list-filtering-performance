@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <item2 v-for="item in list" :itemData="item"></item2>
+    <item2 v-for="item in list" :itemData="item" v-show="!item.filtered" :key="item.id"></item2>
   </div>
 </template>
 <script>

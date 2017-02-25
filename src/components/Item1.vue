@@ -2,14 +2,14 @@
   <div class="item list-item">
       <div class="row">
         <div class="col-md-2">
-          <img :src="itemData.avatar" class="img-responsive" alt="">
+          <img :src="item.avatar" class="img-responsive" alt="">
         </div>
         <div class="col-md-8">
-          <h4>{{ itemData.name }}</h4>
+          <h4>{{ item.name }}</h4>
           <ul class="list">
-            <li>{{ itemData.gender }}</li>
-            <li>{{ itemData.jobArea }}</li>
-            <li>{{ itemData.jobType }}</li>
+            <li>{{ item.gender }}</li>
+            <li>{{ item.jobArea }}</li>
+            <li>{{ item.jobType }}</li>
           </ul>
         </div>
         <div class="col-md-2">
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ['itemData'],
+  props: ['item'],
   data () {
     return {
     }

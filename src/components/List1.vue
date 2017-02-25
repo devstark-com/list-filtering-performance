@@ -72,7 +72,7 @@ export default {
   created () {
     console.time('seeding')
     let items = []
-    for (let i = 0; i < 50000; i++) {
+    for (let i = 0; i < 10000; i++) {
       var item = {
         id: i,
         type: 'profile',

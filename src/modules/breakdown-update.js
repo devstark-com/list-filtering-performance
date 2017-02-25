@@ -1,7 +1,11 @@
 export const update = (list, filters, sortings) => {
   let arrayCopy = _getReadonlyArrayCopy(list)
+  console.time('filtering')
   let arrFiltered = _applyFilters(arrayCopy, filters)
-  let arrayResults = arrFiltered
+  console.timeEnd('filtering')
+  console.time('sorting')
+  let arrayResults = _applySortings(arrFiltered, sortings)
+  console.timeEnd('sorting')
   return arrayResults
 }
 
@@ -42,3 +46,18 @@ const _applyFilters = (arr, filters) => {
 
   return arrFiltered
 }
+
+const _applySortings = (arr, sortings) => {
+  arr.sort(function (a, b) {
+    let sParam = sortings.param
+    let sDir = sortings.dir
+    if (sDir === '1') {
+      return a[sParam] > b[sParam] ? 1 : a[sParam] < b[sParam] ? -1 : 0
+    } else {
+      return a[sParam] > b[sParam] ? -1 : a[sParam] < b[sParam] ? 1 : 0
+    }
+  })
+
+  return arr
+}
+

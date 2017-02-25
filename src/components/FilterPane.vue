@@ -1,5 +1,5 @@
 <template>
-  <div class="filters-pane">
+  <div>
     <h4>FILTERS</h4>
     <div v-if="filters !== null">
       <xfilter v-for="(items, index) in filters" :items="items" :name="index"></xfilter>
@@ -22,9 +22,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .filters-pane {
-    position: fixed;
-  }
-</style>

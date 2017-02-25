@@ -2,7 +2,10 @@
   <div class="page container">
     <div class="row">
       <div class="col-md-3">
-        <filter-pane :filters="filters"></filter-pane>
+        <div style="position: fixed;">
+          <filter-pane :filters="filters"></filter-pane>
+          <sorting-pane :sortings="sortingParams"></sorting-pane>
+        </div>
       </div>
       <div class="col-md-9">
         <breakdown1 :list="listForRendering"></breakdown1>
@@ -15,20 +18,32 @@
 import Faker from 'faker'
 import Vue from 'vue'
 import FilterPane from './FilterPane.vue'
+import SortingPane from './SortingPane.vue'
 import Breakdown1 from './Breakdown1.vue'
 import { update as u } from 'modules/breakdown-update.js'
 export default {
   components: {
     FilterPane,
+    SortingPane,
     Breakdown1
   },
   data () {
     return {
+      sortingParams: {
+        gender: 'Gender',
+        name: 'Name',
+        jobArea: 'Job area',
+        jobType: 'Job type'
+      },
       filterTypes: [
         'jobArea', 'jobType', 'gender'
       ],
       list: [],
       filters: {},
+      sorting: {
+        param: 'name',
+        dir: '1'
+      },
       listForRendering: [],
       filteringStates: {}
     }
@@ -56,7 +71,7 @@ export default {
     },
     update () {
       console.time('data update')
-      this.listForRendering = u(this.list, this.filteringStates, null)
+      this.listForRendering = u(this.list, this.filteringStates, this.sorting)
       console.timeEnd('data update')
     },
     filtersChange (name, value) {
@@ -67,6 +82,15 @@ export default {
       }
 
       this.$eventHub.$emit('filter::set-changed')
+    },
+    sortingChange (objValue) {
+      if (objValue.param === this.sorting.param && objValue.dir === this.sorting.dir) {
+        return
+      }
+
+      this.sorting.param = objValue.param
+      this.sorting.dir = objValue.dir
+      this.update()
     }
   },
   created () {
@@ -110,6 +134,7 @@ export default {
     this.$eventHub.$off()
     this.$eventHub.$on('filter::clicked', this.filtersChange)
     this.$eventHub.$on('filter::set-changed', this.update)
+    this.$eventHub.$on('sorting::changed', this.sortingChange)
   }
 }
 </script>
